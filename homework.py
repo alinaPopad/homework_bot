@@ -31,7 +31,7 @@ HOMEWORK_VERDICTS = {
 
 
 def check_tokens():
-    '''функция проверки наличия необходимых переменных окружения'''
+    """функция проверки наличия необходимых переменных окружения."""
     if not TELEGRAM_CHAT_ID:
         logger.critical('TELEGRAM_CHAT_ID not found')
         return False
@@ -45,7 +45,7 @@ def check_tokens():
 
 
 def send_message(bot, message):
-    '''функция отправки сообщения в Telegram'''
+    """функция отправки сообщения в Telegram."""
     try:
         logger.debug(f'отправлено сообщение {message}')
         return bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
@@ -54,7 +54,7 @@ def send_message(bot, message):
 
 
 def get_api_answer(timestamp):
-    '''функция получения ответа от API'''
+    """функция получения ответа от API."""
     params = {'from_date': timestamp}
     try:
         homework_status = requests.get(
@@ -73,7 +73,7 @@ def get_api_answer(timestamp):
 
 
 def check_response(response):
-    '''функция проверки ответа API'''
+    """функция проверки ответа API."""
     if not isinstance(response, dict):
         logger.error(f'это не словарь: {response}')
         raise TypeError('неправильный ответ')
@@ -90,7 +90,7 @@ def check_response(response):
 
 
 def parse_status(homework):
-    '''функция извлечения статуса работы'''
+    """функция извлечения статуса работы."""
     if 'homework_name' not in homework:
         raise KeyError('нет домашки')
     if 'status' not in homework:
